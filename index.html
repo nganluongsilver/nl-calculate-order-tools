@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tính Tổng Giá Bạc</title>
+  <style>
+    body { font-family: Arial; padding: 20px; max-width: 580px; margin: auto; }
+    label { display: block; margin-top: 15px; }
+    input[type="number"] { width: 100%; padding: 8px; margin-top: 5px; }
+    #result { margin-top: 25px; font-size: 16px; }
+    .bold { font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h2>Tính Tổng Giá Bạc</h2>
+
+  <label for="giaLuong">Giá bạc/lượng (VND):</label>
+  <input type="number" id="giaLuong" value="1464000" min="0">
+
+  <label for="giaKg">Giá bạc/kg (VND):</label>
+  <input type="number" id="giaKg" value="39039902" min="0">
+
+  <label for="kg">Số thỏi bạc 1kg:</label>
+  <input type="number" id="kg" value="1" min="0">
+
+  <label for="loai5luong">Số thỏi bạc loại 5 lượng:</label>
+  <input type="number" id="loai5luong" value="4" min="0">
+
+  <label for="mieng1luong">Số miếng bạc 1 lượng:</label>
+  <input type="number" id="mieng1luong" value="4" min="0">
+
+  <label>
+    <input type="checkbox" id="thanhVien"> Khách hàng thân thiết (≥ 4 lần/tuần, không lách hóa đơn)
+  </label>
+
+  <div id="result">
+    <p><span class="bold">Tổng lượng:</span> <span id="tongLuong">0</span></p>
+    <p><span class="bold">Tổng kg:</span> <span id="tongKg">0</span></p>
+    <p><span class="bold">Tổng trước chiết khấu:</span> <span id="tongTruoc">0</span>đ</p>
+    <p><span class="bold">Chiết khấu theo số lượng (lượng):</span> <span id="chietKhauSoLuong">0</span>đ</p>
+    <p><span class="bold">Chiết khấu khách thân thiết:</span> <span id="chietKhauThanhVien">0</span>đ</p>
+    <p class="bold" style="color:green;"><span>Thành tiền sau chiết khấu:</span> <span id="tongSau">0</span>đ</p>
+    <hr>
+    <p><span class="bold">Giá thực tế / lượng:</span> <span id="giaThucTeLuong">0</span>đ</p>
+    <p><span class="bold">Giá thực tế / lượng:</span> <span id="giaThucTe5Luong">0</span>đ</p>
+    <p><span class="bold">Giá thực tế / kg:</span> <span id="giaThucTeKg">0</span>đ</p>
+  </div>
+
+  <script>
+    function formatVN(num, fraction = false) {
+      return Number(fraction ? num.toFixed(4) : Math.round(num)).toLocaleString('vi-VN');
+    }
+
+    function tinhTong() {
+      const giaLuong = +document.getElementById('giaLuong').value;
+      const giaKg = +document.getElementById('giaKg').value;
+
+      const soKg = +document.getElementById('kg').value;
+      const soLoai5Luong = +document.getElementById('loai5luong').value;
+      const soMieng1Luong = +document.getElementById('mieng1luong').value;
+      const isThanhVien = document.getElementById('thanhVien').checked;
+
+      const luongFromKg = soKg * 26.6667;
+      const luongFrom5Luong = soLoai5Luong * 5;
+      const luongFrom1Luong = soMieng1Luong;
+      const tongLuong = luongFromKg + luongFrom5Luong + luongFrom1Luong;
+      const tongKg = soKg + ((luongFrom5Luong + luongFrom1Luong) / 26.6667);
+
+      const tienKg = soKg * giaKg;
+      const tienLuong = (luongFrom5Luong + luongFrom1Luong) * giaLuong;
+      const tongTruoc = tienKg + tienLuong;
+
+      let giamTheoLuong = 0;
+      if (tongLuong >= 300) giamTheoLuong = 180;
+      else if (tongLuong >= 100) giamTheoLuong = 150;
+      else if (tongLuong >= 26.67) giamTheoLuong = 100;
+
+      const chietKhauSoLuong = giamTheoLuong * tongLuong;
+      const chietKhauThanhVien = isThanhVien ? 500 * tongLuong : 0;
+      const tongChietKhau = chietKhauSoLuong + chietKhauThanhVien;
+      const tongSau = tongTruoc - tongChietKhau;
+
+      const giaThucTeLuong = tongLuong > 0 ? tongSau / tongLuong : 0;
+      const giaThucTe5Luong = giaThucTeLuong * 5;
+      const giaThucTeKg = tongKg > 0 ? tongSau / tongKg : 0;
+
+      document.getElementById('tongLuong').innerText = formatVN(tongLuong, true);
+      document.getElementById('tongKg').innerText = formatVN(tongKg, true);
+      document.getElementById('tongTruoc').innerText = formatVN(tongTruoc);
+      document.getElementById('chietKhauSoLuong').innerText = formatVN(chietKhauSoLuong);
+      document.getElementById('chietKhauThanhVien').innerText = formatVN(chietKhauThanhVien);
+      document.getElementById('tongSau').innerText = formatVN(tongSau);
+      document.getElementById('giaThucTeLuong').innerText = formatVN(giaThucTeLuong);
+      document.getElementById('giaThucTe5Luong').innerText = formatVN(giaThucTe5Luong);
+      document.getElementById('giaThucTeKg').innerText = formatVN(giaThucTeKg);
+    }
+
+    document.querySelectorAll('input').forEach(input => {
+      input.addEventListener('input', tinhTong);
+    });
+
+    tinhTong(); // chạy khi tải trang
+  </script>
+</body>
+</html>
