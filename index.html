@@ -46,6 +46,24 @@
     <p><span class="bold">Giá thực tế / kg:</span> <span id="giaThucTeKg">0</span>đ</p>
   </div>
 
+  <hr>
+  <div id="notes" style="margin-top: 30px; font-size: 14px; color: #555;">
+    <p class="bold">Ghi chú về chiết khấu:</p>
+    <ul style="padding-left: 20px;">
+      <li><b>Chiết khấu theo lượng mua:</b></li>
+      <ul>
+        <li>Trên 300 lượng: <b>180 đồng/lượng</b></li>
+        <li>Từ 100 đến dưới 300 lượng: <b>150 đồng/lượng</b></li>
+        <li>Từ 26.67 đến dưới 100 lượng: <b>100 đồng/lượng</b></li>
+        <li>Dưới 26.67 lượng: <b>Không chiết khấu</b></li>
+      </ul>
+      <li><b>Chiết khấu khách hàng thân thiết:</b></li>
+      <ul>
+        <li>Mua ít nhất <b>4 lần/tuần</b> và <b>không lách hóa đơn</b>: <b>500 đồng/lượng</b></li>
+      </ul>
+    </ul>
+  </div>
+
   <script>
     function formatVN(num, fraction = false) {
       return Number(fraction ? num.toFixed(4) : Math.round(num)).toLocaleString('vi-VN');
