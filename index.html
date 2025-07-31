@@ -2,124 +2,206 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Tính Tổng Giá Bạc</title>
+  <title>Tính Tổng Giá Bạc - Ngân Lượng Silver</title>
   <style>
-    body { font-family: Arial; padding: 20px; max-width: 580px; margin: auto; }
-    label { display: block; margin-top: 15px; }
-    input[type="number"] { width: 100%; padding: 8px; margin-top: 5px; }
-    #result { margin-top: 25px; font-size: 16px; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f7f7;
+    }
+    header {
+      background: #fff;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+    header img {
+      height: 50px;
+      vertical-align: middle;
+    }
+    header h1 {
+      display: inline-block;
+      font-size: 20px;
+      margin: 0 10px;
+      color: #444;
+      vertical-align: middle;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+      gap: 20px;
+    }
+    .form, .result {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      flex: 1 1 45%;
+      min-width: 300px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 500;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    #result p {
+      margin: 10px 0;
+    }
     .bold { font-weight: bold; }
+    .green { color: green; }
+
+    #notes {
+      max-width: 1100px;
+      margin: 30px auto;
+      font-size: 14px;
+      color: #555;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    ul { padding-left: 20px; margin: 5px 0; }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 <body>
-  <h2>Tính Tổng Giá Bạc</h2>
 
-  <label for="giaLuong">Giá bạc/lượng (VND):</label>
-  <input type="number" id="giaLuong" value="1464000" min="0">
+<header>
+  <img src="https://scontent.fdad3-6.fna.fbcdn.net/v/t39.30808-6/523127104_2271367873304216_2035198547111528260_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFaJGooY5V2F4mg26L5yCdAYweoouAqE3FjB6ii4CoTcRvvkgqgtNA-djf78ls8JolmX5JnFaNdVjPBkEXub22Z&_nc_ohc=gXKITumdt1kQ7kNvwHtCyv5&_nc_oc=AdnDYNxx8qaUuQ0z2IiSLAivkrWI-1u6Mi5dKUmS4nW7hXnlc8gmFC-8s5OOScx6gYOJDEcLbzLmne3QwmmRQk7C&_nc_zt=23&_nc_ht=scontent.fdad3-6.fna&_nc_gid=NlX6L9OOixSIjyvdH2t-CQ&oh=00_AfTv16qXT50eXrZ-GB5kAG2qK_iIeJ5rvUCYE0K2bPaxMg&oe=689097FA" alt="Ngân Lượng Silver Logo">
+  <h1>Ngân Lượng Silver</h1>
+</header>
 
-  <label for="giaKg">Giá bạc/kg (VND):</label>
-  <input type="number" id="giaKg" value="39039902" min="0">
+<div class="container">
+  <div class="form">
+    <h2>Thông tin đầu vào</h2>
+    <label for="giaLuong">Giá bạc/lượng (VND):</label>
+    <input type="number" id="giaLuong" value="1464000" min="0">
 
-  <label for="kg">Số thỏi bạc 1kg:</label>
-  <input type="number" id="kg" value="1" min="0">
+    <label for="giaKg">Giá bạc/kg (VND):</label>
+    <input type="number" id="giaKg" value="39039902" min="0">
 
-  <label for="loai5luong">Số thỏi bạc loại 5 lượng:</label>
-  <input type="number" id="loai5luong" value="4" min="0">
+    <label for="kg">Số thỏi bạc 1kg:</label>
+    <input type="number" id="kg" value="1" min="0">
 
-  <label for="mieng1luong">Số miếng bạc 1 lượng:</label>
-  <input type="number" id="mieng1luong" value="4" min="0">
+    <label for="loai5luong">Số thỏi bạc loại 5 lượng:</label>
+    <input type="number" id="loai5luong" value="4" min="0">
 
-  <label>
-    <input type="checkbox" id="thanhVien"> Khách hàng thân thiết (≥ 4 lần/tuần, không lách hóa đơn)
-  </label>
+    <label for="mieng1luong">Số miếng bạc 1 lượng:</label>
+    <input type="number" id="mieng1luong" value="4" min="0">
 
-  <div id="result">
+    <label>
+      <input type="checkbox" id="thanhVien"> Khách hàng thân thiết (≥ 4 lần/tuần, không lách hóa đơn)
+    </label>
+  </div>
+
+  <div class="result" id="result">
+    <h2>Kết quả tính toán</h2>
     <p><span class="bold">Tổng lượng:</span> <span id="tongLuong">0</span></p>
     <p><span class="bold">Tổng kg:</span> <span id="tongKg">0</span></p>
     <p><span class="bold">Tổng trước chiết khấu:</span> <span id="tongTruoc">0</span>đ</p>
     <p><span class="bold">Chiết khấu theo số lượng (lượng):</span> <span id="chietKhauSoLuong">0</span>đ</p>
     <p><span class="bold">Chiết khấu khách thân thiết:</span> <span id="chietKhauThanhVien">0</span>đ</p>
-    <p class="bold" style="color:green;"><span>Thành tiền sau chiết khấu:</span> <span id="tongSau">0</span>đ</p>
+    <p class="bold green"><span>Thành tiền sau chiết khấu:</span> <span id="tongSau">0</span>đ</p>
     <hr>
     <p><span class="bold">Giá thực tế / lượng:</span> <span id="giaThucTeLuong">0</span>đ</p>
-    <p><span class="bold">Giá thực tế / lượng:</span> <span id="giaThucTe5Luong">0</span>đ</p>
+    <p><span class="bold">Giá thực tế / 5 lượng:</span> <span id="giaThucTe5Luong">0</span>đ</p>
     <p><span class="bold">Giá thực tế / kg:</span> <span id="giaThucTeKg">0</span>đ</p>
   </div>
-  
-  <hr>
-<div id="notes" style="margin-top: 30px; font-size: 14px; color: #555;">
+</div>
+
+<div id="notes">
   <p class="bold">Ghi chú về chiết khấu:</p>
-  <ul style="padding-left: 20px;">
-    <li><b>Chiết khấu theo lượng mua:</b></li>
-    <ul>
-      <li>Trên 300 lượng: <b>180 đồng/lượng</b></li>
-      <li>Từ 100 đến dưới 300 lượng: <b>150 đồng/lượng</b></li>
-      <li>Từ 26.67 đến dưới 100 lượng: <b>100 đồng/lượng</b></li>
-      <li>Dưới 26.67 lượng: <b>Không chiết khấu</b></li>
-    </ul>
-    <li><b>Chiết khấu khách hàng thân thiết:</b></li>
-    <ul>
-      <li>Mua ít nhất <b>4 lần/tuần</b> và <b>không lách hóa đơn</b>: <b>500 đồng/lượng</b></li>
-    </ul>
+  <ul>
+    <li><b>Chiết khấu theo lượng mua:</b>
+      <ul>
+        <li>Trên 300 lượng: <b>180 đồng/lượng</b></li>
+        <li>Từ 100 đến dưới 300 lượng: <b>150 đồng/lượng</b></li>
+        <li>Từ 26.67 đến dưới 100 lượng: <b>100 đồng/lượng</b></li>
+        <li>Dưới 26.67 lượng: <b>Không chiết khấu</b></li>
+      </ul>
+    </li>
+    <li><b>Chiết khấu khách hàng thân thiết:</b>
+      <ul>
+        <li>Mua ít nhất <b>4 lần/tuần</b> và <b>không lách hóa đơn</b>: <b>500 đồng/lượng</b></li>
+      </ul>
+    </li>
   </ul>
 </div>
 
-  <script>
-    function formatVN(num, fraction = false) {
-      return fraction
-    ? num.toLocaleString('vi-VN', { minimumFractionDigits: 4, maximumFractionDigits: 4 })
-    : Math.round(num).toLocaleString('vi-VN');
-    }
+<script>
+  function formatVN(num, fraction = false) {
+    return fraction
+      ? num.toLocaleString('vi-VN', { minimumFractionDigits: 4, maximumFractionDigits: 4 })
+      : Math.round(num).toLocaleString('vi-VN');
+  }
 
-    function tinhTong() {
-      const giaLuong = +document.getElementById('giaLuong').value;
-      const giaKg = +document.getElementById('giaKg').value;
+  function tinhTong() {
+    const giaLuong = +document.getElementById('giaLuong').value;
+    const giaKg = +document.getElementById('giaKg').value;
 
-      const soKg = +document.getElementById('kg').value;
-      const soLoai5Luong = +document.getElementById('loai5luong').value;
-      const soMieng1Luong = +document.getElementById('mieng1luong').value;
-      const isThanhVien = document.getElementById('thanhVien').checked;
+    const soKg = +document.getElementById('kg').value;
+    const soLoai5Luong = +document.getElementById('loai5luong').value;
+    const soMieng1Luong = +document.getElementById('mieng1luong').value;
+    const isThanhVien = document.getElementById('thanhVien').checked;
 
-      const luongFromKg = soKg * 26.6667;
-      const luongFrom5Luong = soLoai5Luong * 5;
-      const luongFrom1Luong = soMieng1Luong;
-      const tongLuong = luongFromKg + luongFrom5Luong + luongFrom1Luong;
-      const tongKg = soKg + ((luongFrom5Luong + luongFrom1Luong) / 26.6667);
+    const luongFromKg = soKg * 26.6667;
+    const luongFrom5Luong = soLoai5Luong * 5;
+    const luongFrom1Luong = soMieng1Luong;
+    const tongLuong = luongFromKg + luongFrom5Luong + luongFrom1Luong;
+    const tongKg = soKg + ((luongFrom5Luong + luongFrom1Luong) / 26.6667);
 
-      const tienKg = soKg * giaKg;
-      const tienLuong = (luongFrom5Luong + luongFrom1Luong) * giaLuong;
-      const tongTruoc = tienKg + tienLuong;
+    const tienKg = soKg * giaKg;
+    const tienLuong = (luongFrom5Luong + luongFrom1Luong) * giaLuong;
+    const tongTruoc = tienKg + tienLuong;
 
-      let giamTheoLuong = 0;
-      if (tongLuong >= 300) giamTheoLuong = 180;
-      else if (tongLuong >= 100) giamTheoLuong = 150;
-      else if (tongLuong >= 26.67) giamTheoLuong = 100;
+    let giamTheoLuong = 0;
+    if (tongLuong >= 300) giamTheoLuong = 180;
+    else if (tongLuong >= 100) giamTheoLuong = 150;
+    else if (tongLuong >= 26.67) giamTheoLuong = 100;
 
-      const chietKhauSoLuong = giamTheoLuong * tongLuong;
-      const chietKhauThanhVien = isThanhVien ? 500 * tongLuong : 0;
-      const tongChietKhau = chietKhauSoLuong + chietKhauThanhVien;
-      const tongSau = tongTruoc - tongChietKhau;
+    const chietKhauSoLuong = giamTheoLuong * tongLuong;
+    const chietKhauThanhVien = isThanhVien ? 500 * tongLuong : 0;
+    const tongChietKhau = chietKhauSoLuong + chietKhauThanhVien;
+    const tongSau = tongTruoc - tongChietKhau;
 
-      const giaThucTeLuong = tongLuong > 0 ? tongSau / tongLuong : 0;
-      const giaThucTe5Luong = giaThucTeLuong * 5;
-      const giaThucTeKg = tongKg > 0 ? tongSau / tongKg : 0;
+    const giaThucTeLuong = tongLuong > 0 ? tongSau / tongLuong : 0;
+    const giaThucTe5Luong = giaThucTeLuong * 5;
+    const giaThucTeKg = tongKg > 0 ? tongSau / tongKg : 0;
 
-      document.getElementById('tongLuong').innerText = formatVN(tongLuong, true);
-      document.getElementById('tongKg').innerText = formatVN(tongKg, true);
-      document.getElementById('tongTruoc').innerText = formatVN(tongTruoc);
-      document.getElementById('chietKhauSoLuong').innerText = formatVN(chietKhauSoLuong);
-      document.getElementById('chietKhauThanhVien').innerText = formatVN(chietKhauThanhVien);
-      document.getElementById('tongSau').innerText = formatVN(tongSau);
-      document.getElementById('giaThucTeLuong').innerText = formatVN(giaThucTeLuong);
-      document.getElementById('giaThucTe5Luong').innerText = formatVN(giaThucTe5Luong);
-      document.getElementById('giaThucTeKg').innerText = formatVN(giaThucTeKg);
-    }
+    document.getElementById('tongLuong').innerText = formatVN(tongLuong, true);
+    document.getElementById('tongKg').innerText = formatVN(tongKg, true);
+    document.getElementById('tongTruoc').innerText = formatVN(tongTruoc);
+    document.getElementById('chietKhauSoLuong').innerText = formatVN(chietKhauSoLuong);
+    document.getElementById('chietKhauThanhVien').innerText = formatVN(chietKhauThanhVien);
+    document.getElementById('tongSau').innerText = formatVN(tongSau);
+    document.getElementById('giaThucTeLuong').innerText = formatVN(giaThucTeLuong);
+    document.getElementById('giaThucTe5Luong').innerText = formatVN(giaThucTe5Luong);
+    document.getElementById('giaThucTeKg').innerText = formatVN(giaThucTeKg);
+  }
 
-    document.querySelectorAll('input').forEach(input => {
-      input.addEventListener('input', tinhTong);
-    });
+  document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('input', tinhTong);
+  });
 
-    tinhTong(); // chạy khi tải trang
-  </script>
+  tinhTong(); // chạy khi tải trang
+</script>
+
 </body>
 </html>
