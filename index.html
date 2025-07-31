@@ -182,10 +182,10 @@
   <ul>
     <li><b>Chiết khấu theo lượng mua:</b>
       <ul>
-        <li>Trên 300 lượng: <b>180 đồng/lượng</b></li>
-        <li>Từ 100 đến dưới 300 lượng: <b>150 đồng/lượng</b></li>
-        <li>Từ 26.67 đến dưới 100 lượng: <b>100 đồng/lượng</b></li>
-        <li>Dưới 26.67 lượng: <b>Không chiết khấu</b></li>
+        <li>Trên 266,667 lượng: <b>1800 đồng/lượng</b></li>
+        <li>Từ 100 đến dưới 300 lượng: <b>1500 đồng/lượng</b></li>
+        <li>Từ 26,6667 đến dưới 100 lượng: <b>1000 đồng/lượng</b></li>
+        <li>Dưới 26,6667 lượng: <b>Không chiết khấu</b></li>
       </ul>
     </li>
     <li><b>Chiết khấu khách hàng thân thiết:</b>
@@ -223,9 +223,9 @@
     const tongTruoc = tienKg + tienLuong;
 
     let giamTheoLuong = 0;
-    if (tongLuong >= 300) giamTheoLuong = 180;
-    else if (tongLuong >= 100) giamTheoLuong = 150;
-    else if (tongLuong >= 26.6667) giamTheoLuong = 100;
+    if (tongLuong >= 266.667) giamTheoLuong = 1800;
+    else if (tongLuong >= 100) giamTheoLuong = 1500;
+    else if (tongLuong >= 26.6667) giamTheoLuong = 1000;
 
     const chietKhauSoLuong = giamTheoLuong * tongLuong;
     const chietKhauThanhVien = isThanhVien ? 500 * tongLuong : 0;
