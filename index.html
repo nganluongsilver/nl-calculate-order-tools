@@ -215,11 +215,11 @@
     const soMieng1Luong = +document.getElementById('mieng1luong').value;
     const isThanhVien = document.getElementById('thanhVien').checked;
 
-    const luongFromKg = soKg * 26.6666;
+    const luongFromKg = soKg * 26.6667;
     const luongFrom5Luong = soLoai5Luong * 5;
     const luongFrom1Luong = soMieng1Luong;
     const tongLuong = luongFromKg + luongFrom5Luong + luongFrom1Luong;
-    const tongKg = soKg + ((luongFrom5Luong + luongFrom1Luong) / 26.6666);
+    const tongKg = soKg + ((luongFrom5Luong + luongFrom1Luong) / 26.6667);
 
     const tienKg = soKg * giaKg;
     const tienLuong = (luongFrom5Luong + luongFrom1Luong) * giaLuong;
@@ -228,7 +228,7 @@
     let giamTheoLuong = 0;
     if (tongLuong >= 266.667) giamTheoLuong = 1800;
     else if (tongLuong >= 100) giamTheoLuong = 1500;
-    else if (tongLuong >= 26.6666) giamTheoLuong = 1000;
+    else if (tongLuong >= 26.6667) giamTheoLuong = 1000;
 
     const chietKhauSoLuong = giamTheoLuong * tongLuong;
     const chietKhauThanhVien = isThanhVien ? 500 * tongLuong : 0;
