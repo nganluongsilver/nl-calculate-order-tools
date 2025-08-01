@@ -197,11 +197,14 @@
 </div>
 
 <script>
-  function formatVN(num, fraction = false) {
-    return fraction
-      ? num.toLocaleString('vi-VN', { minimumFractionDigits: 4, maximumFractionDigits: 4 })
-      : Math.round(num).toLocaleString('vi-VN');
-  }
+    function formatVN(num, fraction = false, digits = 4) {
+      return fraction
+        ? num.toLocaleString('vi-VN', {
+            minimumFractionDigits: digits,
+            maximumFractionDigits: digits
+          })
+        : Math.round(num).toLocaleString('vi-VN');
+    }
 
   function tinhTong() {
     const giaLuong = +document.getElementById('giaLuong').value;
@@ -242,9 +245,9 @@
     document.getElementById('chietKhauSoLuong').innerText = formatVN(chietKhauSoLuong);
     document.getElementById('chietKhauThanhVien').innerText = formatVN(chietKhauThanhVien);
     document.getElementById('tongSau').innerText = formatVN(tongSau);
-    document.getElementById('giaThucTeLuong').innerText = formatVN(giaThucTeLuong);
-    document.getElementById('giaThucTe5Luong').innerText = formatVN(giaThucTe5Luong);
-    document.getElementById('giaThucTeKg').innerText = formatVN(giaThucTeKg);
+    document.getElementById('giaThucTeLuong').innerText = formatVN(giaThucTeLuong, true, 3);
+    document.getElementById('giaThucTe5Luong').innerText = formatVN(giaThucTe5Luong, true, 3);
+    document.getElementById('giaThucTeKg').innerText = formatVN(giaThucTeKg, true, 3);
   }
 
   document.querySelectorAll('input').forEach(input => {
